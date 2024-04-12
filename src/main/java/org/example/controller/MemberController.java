@@ -28,6 +28,9 @@ public class MemberController extends Controller{
             case "join":
                 doJoin();
                 break;
+            case "logout":
+                doLogout();
+                break;
             case "login":
                 doLogin();
                 break;
@@ -82,6 +85,10 @@ public class MemberController extends Controller{
     }
 
     private void doLogin() {
+        if ( isLogined() ) {
+            System.out.println("이미 로그인 되어 있습니다.");
+            return;
+        }
         System.out.printf("로그인 아이디 : ");
         String loginId = sc.nextLine();
         System.out.printf("로그인 비번 : ");
@@ -103,6 +110,19 @@ public class MemberController extends Controller{
         System.out.printf("로그인 성공! %s님 환영합니다!\n", loginedMember.name);
     }
 
+    private boolean isLogined() {
+        return loginedMember != null;
+    }
+
+    private void doLogout() {
+        if ( isLogined() == false ) {
+            System.out.println("로그인 상태가 아닙니다.");
+            return;
+        }
+
+        loginedMember = null;
+        System.out.println("로그아웃 되었습니다.");
+    }
     private boolean isJoinableLoginId(String loginId) {
         int index = getMemberIndexByLoginId(loginId);
 
