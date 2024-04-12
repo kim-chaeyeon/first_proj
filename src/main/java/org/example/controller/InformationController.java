@@ -1,7 +1,6 @@
 package org.example.controller;
 
 import org.example.dto.Information;
-import org.example.dto.Member;
 import org.example.util.Util;
 
 import java.util.ArrayList;
@@ -37,6 +36,9 @@ public class InformationController extends Controller{
                 break;
             case "delete":
                 doDelete();
+                break;
+            default:
+                System.out.println("존재하지 않는 명령어 입니다.");
                 break;
         }
     }
