@@ -8,14 +8,39 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class InformationController {
+public class InformationController extends Controller{
     private Scanner sc;
     private List<Information> informations;
+    private String cmd;
+    private String actionMethodName;
 
     public InformationController(Scanner sc) {
         this.sc = sc;
         informations = new ArrayList<>();
     }
+    public void doAction(String cmd, String actionMethodName) {
+        this.cmd = cmd;
+        this.actionMethodName = actionMethodName;
+
+        switch (actionMethodName) {
+            case "write":
+                doWrite();
+                break;
+            case "list":
+                showList();
+                break;
+            case "detail":
+                showDetail();
+                break;
+            case "modify":
+                doModify();
+                break;
+            case "delete":
+                doDelete();
+                break;
+        }
+    }
+
     public void doWrite(){
         int id = informations.size() + 1;
         String regDate = Util.getNowDateStr();
@@ -41,7 +66,7 @@ public class InformationController {
 
         System.out.printf("%d번 정보가 생성되었습니다.\n", id);
     }
-    public void showList(String cmd) {
+    public void showList() {
         if (informations.size() == 0) {
             System.out.println("게시물이 없습니다.");
             return;
@@ -75,7 +100,7 @@ public class InformationController {
                     information.snsId, information.appeal);
         }
     }
-    public void  showDetail(String cmd) {
+    public void  showDetail() {
         String[] cmdBits = cmd.split(" ");
         int id = Integer.parseInt(cmdBits[2]); // "1" => 1
 
@@ -96,7 +121,7 @@ public class InformationController {
         System.out.printf("인스타 아이디 : %s\n", foundInformation.snsId);
         System.out.printf("매력어필 : %s\n", foundInformation.appeal);
     }
-    public void doModify(String cmd){
+    public void doModify(){
         String[] cmdBits = cmd.split(" ");
         int id = Integer.parseInt(cmdBits[2]);
 
@@ -135,7 +160,7 @@ public class InformationController {
 
         System.out.printf("%d번 정보가 수정되었습니다.\n", id);
     }
-    public void doDelete(String cmd) {
+    public void doDelete() {
         String[] cmdBits = cmd.split(" ");
         int id = Integer.parseInt(cmdBits[2]);
 

@@ -2,9 +2,8 @@ package org.example;
 
 import org.example.controller.InformationController;
 import org.example.controller.MemberController;
+import org.example.controller.Controller;
 import org.example.dto.Information;
-import org.example.dto.Member;
-import org.example.util.Util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,25 +37,19 @@ public class App {
             if (cmd.equals("exit")) {
                 break;
             }
+            String[] cmdBits = cmd.split(" ");
+            String controllerName = cmdBits[0];
+            String actionMethodName = cmdBits[1];
 
-            if ( cmd.equals("member join") ) {
-                memberController.doJoin();
-            }
+            Controller controller = null;
 
-            else if (cmd.equals("information write")) {
-
-
-            } else if (cmd.equals("information list")) {
-
-
-            } else if (cmd.startsWith("information detail ")) {
-
-            } else if (cmd.startsWith("information delete ")) {
-
-            } else if (cmd.startsWith("information modify ")) {
-
-            } else {
-                System.out.printf("%s(은)는 존재하지 않는 명령어 입니다.\n", cmd);
+            if (controllerName.equals("information")) {
+                controller = informationController;
+            } else if (controllerName.equals("member")) {
+                controller = memberController;
+        } else {
+                System.out.println("존재하지 않는 명령어입니다.");
+                continue;
             }
         }
         sc.close();
