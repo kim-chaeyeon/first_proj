@@ -11,10 +11,12 @@ public class Information extends Dto {
     public String mbti;
     public String snsId;
     public String appeal;
+    public int memberId;
 
-    public Information(int id, String regDate, String name, String sex, String age, String major, String phoneNumber, String mbti, String snsId, String appeal) {
+    public Information(int id, String regDate, int memberId, String name, String sex, String age, String major, String phoneNumber, String mbti, String snsId, String appeal) {
         this.id = id;
         this.regDate = regDate;
+        this.memberId = memberId;
         this.name = name;
         this.sex = sex;
         this.age = age;

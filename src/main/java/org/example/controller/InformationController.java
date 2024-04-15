@@ -67,7 +67,7 @@ public class InformationController extends Controller{
         System.out.printf("매력어필 : ");
         String appeal = sc.nextLine();
 
-        Information information = new Information(id, regDate, name, sex, age, major, phoneNumber, mbti, snsId, appeal);
+        Information information = new Information(id, regDate, loginedMember.id, name, sex, age, major, phoneNumber, mbti, snsId, appeal);
         informations.add(information);
 
         System.out.printf("%d번 정보가 생성되었습니다.\n", id);
@@ -96,12 +96,12 @@ public class InformationController extends Controller{
             }
         }
 
-        System.out.println("번호 | 이름 | 성별 | 나이 | 학과 | 전화번호 | MBTI | 인스타 아이디 | 매력어필");
+        System.out.println("번호 | 작성자 | 이름 | 성별 | 나이 | 학과 | 전화번호 | MBTI | 인스타 아이디 | 매력어필");
         for (int i = informations.size() - 1; i >= 0; i--) {
             Information information = informations.get(i);
 
-            System.out.printf("%d | %s | %s | %s | %s | %s | %s | %s | %s\n",
-                    information.id, information.name, information.sex, information.age,
+            System.out.printf("%d | %d | %s | %s | %s | %s | %s | %s | %s | %s\n",
+                    information.id, information.memberId,information.name, information.sex, information.age,
                     information.major, information.phoneNumber, information.mbti,
                     information.snsId, information.appeal);
         }
@@ -119,6 +119,7 @@ public class InformationController extends Controller{
 
         System.out.printf("번호 : %d\n", foundInformation.id);
         System.out.printf("날짜 : %s\n", foundInformation.regDate);
+        System.out.printf("작성자 : %d\n", foundInformation.memberId);
         System.out.printf("이름 : %s\n", foundInformation.name);
         System.out.printf("나이 : %s\n", foundInformation.age);
         System.out.printf("학과 : %s\n", foundInformation.major);
@@ -135,6 +136,11 @@ public class InformationController extends Controller{
 
         if (foundInformation == null) {
             System.out.printf("%d번 정보는 존재하지 않습니다.\n", id);
+            return;
+        }
+
+        if ( foundInformation.memberId != loginedMember.id ) {
+            System.out.printf("권한이 없습니다.\n");
             return;
         }
 
@@ -170,17 +176,19 @@ public class InformationController extends Controller{
         String[] cmdBits = cmd.split(" ");
         int id = Integer.parseInt(cmdBits[2]);
 
-        int foundIndex = getInformationIndexById(id);
+        Information foundInformation = getInformationById(id);
 
-        if (foundIndex == -1) {
+        if (foundInformation == null) {
             System.out.printf("%d번 정보는 존재하지 않습니다.\n", id);
             return;
         }
 
-        // size() => 3
-        // index : 0, 1, 2
-        // id    : 1, 2, 3
-        informations.remove(foundIndex);
+        if ( foundInformation.memberId != loginedMember.id ) {
+            System.out.printf("권한이 없습니다.\n");
+            return;
+        }
+
+        informations.remove(foundInformation);
 
         System.out.printf("%d번 정보가 삭제되었습니다.\n", id);
     }
