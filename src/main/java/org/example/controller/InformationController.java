@@ -1,6 +1,8 @@
 package org.example.controller;
 
+import org.example.Container;
 import org.example.dto.Information;
+import org.example.dto.Member;
 import org.example.util.Util;
 
 import java.util.ArrayList;
@@ -15,7 +17,7 @@ public class InformationController extends Controller{
 
     public InformationController(Scanner sc) {
         this.sc = sc;
-        informations = new ArrayList<>();
+        informations = Container.informationDao.information;
     }
     public void doAction(String cmd, String actionMethodName) {
         this.cmd = cmd;
@@ -92,9 +94,19 @@ public class InformationController extends Controller{
             }
         }
 
-        System.out.println("번호 | 작성자 | 이름 | 성별 | 나이 | 학과 | 전화번호 | MBTI | 인스타 아이디 | 매력어필");
+        System.out.println("번호 |  작성자 | 이름 | 성별 | 나이 | 학과 | 전화번호 | MBTI | 인스타 아이디 | 매력어필");
         for (int i = informations.size() - 1; i >= 0; i--) {
             Information information = informations.get(i);
+            String writerName = null;
+
+            List<Member> members = Container.memberDao.members;
+
+            for ( Member member : members ) {
+                if ( information.memberId == member.id ) {
+                    writerName = member.name;
+                    break;
+                }
+            }
 
             System.out.printf("%d | %d | %s | %s | %s | %s | %s | %s | %s | %s\n",
                     information.id, information.memberId,information.name, information.sex, information.age,
