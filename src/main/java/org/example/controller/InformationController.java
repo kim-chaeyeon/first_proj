@@ -67,7 +67,7 @@ public class InformationController extends Controller{
         String appeal = sc.nextLine();
 
         Information information = new Information(id, regDate, loginedMember.id, name, sex, age, major, phoneNumber, mbti, snsId, appeal);
-        Container.informationDao.add(information);
+        informationService.write(information);
 
         System.out.printf("%d번 정보가 생성되었습니다.\n", id);
     }

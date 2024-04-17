@@ -13,9 +13,9 @@ public class InformationDao extends Dao {
         informations = new ArrayList<>();
     }
 
-    public void add(Information information) {
+    public void write(Information information) {
         informations.add(information);
-        lastId++;
+        lastId = information.id;
     }
     private int getInformationIndexById(int id) {
         int i = 0;

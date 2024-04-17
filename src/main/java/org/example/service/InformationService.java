@@ -25,4 +25,8 @@ public class InformationService {
     public void remove(Information foundInformation) {
         informationDao.remove(foundInformation);
     }
+
+    public void write(Information information) {
+        informationDao.write(information);
+    }
 }
