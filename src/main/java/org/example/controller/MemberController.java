@@ -4,7 +4,6 @@ import org.example.Container;
 import org.example.dto.Member;
 import org.example.util.Util;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -40,7 +39,7 @@ public class MemberController extends Controller{
 
     }
     public void doJoin() {
-        int id = members.size() + 1;
+        int id = Container.memberDao.getNewId();
         String regDate = Util.getNowDateStr();
 
         String loginId = null;
@@ -78,7 +77,7 @@ public class MemberController extends Controller{
         String name = sc.nextLine();
 
         Member member = new Member(id, regDate, loginId, loginPw, name);
-        members.add(member);
+        Container.memberDao.add(member);
 
         System.out.printf("%d번 회원이 생성되었습니다. 환영합니다!\n", id);
     }

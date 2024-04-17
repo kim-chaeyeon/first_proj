@@ -17,7 +17,7 @@ public class InformationController extends Controller{
 
     public InformationController(Scanner sc) {
         this.sc = sc;
-        informations = Container.informationDao.information;
+        informations = Container.informationDao.informations;
     }
     public void doAction(String cmd, String actionMethodName) {
         this.cmd = cmd;
@@ -46,7 +46,7 @@ public class InformationController extends Controller{
     }
 
     public void doWrite(){
-        int id = informations.size() + 1;
+        int id = Container.informationDao.getNewId();
         String regDate = Util.getNowDateStr();
         System.out.printf("이름 : ");
         String name = sc.nextLine();
@@ -66,7 +66,7 @@ public class InformationController extends Controller{
         String appeal = sc.nextLine();
 
         Information information = new Information(id, regDate, loginedMember.id, name, sex, age, major, phoneNumber, mbti, snsId, appeal);
-        informations.add(information);
+        Container.informationDao.add(information);
 
         System.out.printf("%d번 정보가 생성되었습니다.\n", id);
     }
