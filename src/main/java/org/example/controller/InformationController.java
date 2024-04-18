@@ -1,12 +1,12 @@
 package org.example.controller;
 
-import org.example.Container;
+import org.example.container.Container;
 import org.example.dto.Information;
 import org.example.dto.Member;
 import org.example.service.InformationService;
+import org.example.service.MemberService;
 import org.example.util.Util;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -15,10 +15,14 @@ public class InformationController extends Controller{
     private String cmd;
     private String actionMethodName;
     private InformationService informationService;
+    private MemberService memberService;
+    private Session session;
 
     public InformationController(Scanner sc) {
         this.sc = sc;
         informationService = Container.informationService;
+        memberService = Container.memberService;
+        session = Container.getSession();
     }
     public void doAction(String cmd, String actionMethodName) {
         this.cmd = cmd;
@@ -66,6 +70,7 @@ public class InformationController extends Controller{
         System.out.printf("매력어필 : ");
         String appeal = sc.nextLine();
 
+        Member loginedMember = session.getLoginedMember();
         Information information = new Information(id, regDate, loginedMember.id, name, sex, age, major, phoneNumber, mbti, snsId, appeal);
         informationService.write(information);
 
@@ -135,6 +140,8 @@ public class InformationController extends Controller{
             return;
         }
 
+        Member loginedMember = session.getLoginedMember();
+
         if ( foundInformation.memberId != loginedMember.id ) {
             System.out.printf("권한이 없습니다.\n");
             return;
@@ -178,6 +185,8 @@ public class InformationController extends Controller{
             System.out.printf("%d번 정보는 존재하지 않습니다.\n", id);
             return;
         }
+
+        Member loginedMember = session.getLoginedMember();
 
         if ( foundInformation.memberId != loginedMember.id ) {
             System.out.printf("권한이 없습니다.\n");

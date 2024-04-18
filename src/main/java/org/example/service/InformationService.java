@@ -1,10 +1,9 @@
 package org.example.service;
 
-import org.example.Container;
+import org.example.container.Container;
 import org.example.dao.InformationDao;
 import org.example.dto.Information;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class InformationService {

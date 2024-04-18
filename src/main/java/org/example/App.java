@@ -4,6 +4,7 @@ import org.example.controller.InformationController;
 import org.example.controller.MemberController;
 import org.example.controller.Controller;
 import org.example.dto.Information;
+import org.example.container.Container;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +66,7 @@ public class App {
                 case "information/delete":
                 case "information/modify":
                 case "member/logout":
-                    if (Controller.isLogined() == false) {
+                    if (Container.getSession().isLogined() == false) {
                         System.out.println("로그인 후 이용해주세요.");
                         continue;
                     }
@@ -75,7 +76,7 @@ public class App {
             switch (actionName) {
                 case "member/login":
                 case  "member/join":
-                    if (Controller.isLogined()) {
+                    if (Container.getSession().isLogined()) {
                         System.out.println("로그아웃 후 이용해주세요.");
                         continue;
                     }
