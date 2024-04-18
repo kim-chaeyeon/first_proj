@@ -77,8 +77,10 @@ public class MemberController extends Controller{
 
         System.out.printf("이름 : ");
         String name = sc.nextLine();
+        System.out.printf("이메일 : ");
+        String email = sc.nextLine();
 
-        Member member = new Member(id, regDate, loginId, loginPw, name);
+        Member member = new Member(id, regDate, loginId, loginPw, name, email);
         memberService.join(member);
 
         System.out.printf("%d번 회원이 생성되었습니다. 환영합니다!\n", id);

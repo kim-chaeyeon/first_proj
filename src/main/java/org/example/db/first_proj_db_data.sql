@@ -21,21 +21,27 @@ USE `first_proj`;
 DROP TABLE IF EXISTS `information`;
 
 CREATE TABLE `information` (
-  `iid` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `regDate` datetime NOT NULL,
-  `memberId` int(10) unsigned NOT NULL,
+  `memberId` char(100) NOT NULL,
   `name` char(100) NOT NULL,
   `sex` char(2) NOT NULL,
-  `age` int(3) NOT NULL,
+  `age` int(11) NOT NULL,
   `major` char(100) NOT NULL,
-  `phoneNumber` int(11) unsigned NOT NULL,
+  `phoneNumber` varchar(11) NOT NULL,
   `mbti` char(4) NOT NULL,
   `snsId` char(100) NOT NULL,
   `appeal` text NOT NULL,
-  PRIMARY KEY (`iid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `memberId` (`memberId`),
+  UNIQUE KEY `phoneNumber` (`phoneNumber`),
+  UNIQUE KEY `snsId` (`snsId`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `information` */
+
+insert  into `information`(`id`,`regDate`,`memberId`,`name`,`sex`,`age`,`major`,`phoneNumber`,`mbti`,`snsId`,`appeal`) values 
+(1,'2024-04-18 16:22:03','che3776','김채연','여',23,'빅데이터응용','1057113776','INTP','chae._.yeon__','안녕하세요!!');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
