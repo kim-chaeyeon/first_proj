@@ -3,18 +3,20 @@ package org.example;
 import org.example.controller.InformationController;
 import org.example.controller.MemberController;
 import org.example.controller.Controller;
-import org.example.dto.Information;
 import org.example.container.Container;
+import org.example.db.DBConnection;
 
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Scanner;
 
 public class App {
-    private List<Information> informations;
+    public App() {
+        DBConnection.DB_NAME = "first_proj";
+        DBConnection.DB_USER = "sbsst";
+        DBConnection.DB_PASSWORD = "sbs123414";
+        DBConnection.DB_PORT = 3306;
 
-    App() {
-        informations = new ArrayList<>();
+        Container.getDBConnection().connect();
     }
 
     public void start() {

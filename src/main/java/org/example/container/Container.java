@@ -2,12 +2,14 @@ package org.example.container;
 
 import org.example.dao.InformationDao;
 import org.example.dao.MemberDao;
+import org.example.db.DBConnection;
 import org.example.service.InformationService;
 import org.example.service.MemberService;
 import org.example.controller.Session;
 
 public class Container {
     public static Session session;
+    public static DBConnection dbConnection;
     public static InformationDao informationDao;
     public static MemberDao memberDao;
     public static InformationService informationService;
@@ -25,5 +27,13 @@ public class Container {
         }
 
         return session;
+    }
+
+    public static DBConnection getDBConnection() {
+        if ( dbConnection == null ) {
+            dbConnection = new DBConnection();
+        }
+
+        return dbConnection;
     }
 }
