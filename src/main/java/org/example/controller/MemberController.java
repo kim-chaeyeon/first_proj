@@ -12,7 +12,7 @@ public class MemberController extends Controller{
     private String cmd;
     private String actionMethodName;
     private MemberService memberService;
-    private Session session;
+    private static Session session;
 
     public MemberController(Scanner sc) {
         this.sc = sc;
@@ -109,7 +109,7 @@ public class MemberController extends Controller{
         System.out.printf("로그인 성공! %s님 환영합니다!\n", loginedMember.name);
     }
 
-    private void doLogout() {
+    public static void doLogout() {
         session.setLoginedMember(null);
         System.out.println("로그아웃 되었습니다.");
     }

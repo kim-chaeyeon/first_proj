@@ -4,7 +4,6 @@ import org.example.container.Container;
 import org.example.dto.Information;
 import org.example.dto.Member;
 import org.example.service.InformationService;
-import org.example.service.MemberService;
 import org.example.util.Util;
 
 import java.util.List;
@@ -15,13 +14,11 @@ public class InformationController extends Controller{
     private String cmd;
     private String actionMethodName;
     private InformationService informationService;
-    private MemberService memberService;
     private Session session;
 
     public InformationController(Scanner sc) {
         this.sc = sc;
         informationService = Container.informationService;
-        memberService = Container.memberService;
         session = Container.getSession();
     }
     public void doAction(String cmd, String actionMethodName) {
@@ -72,9 +69,9 @@ public class InformationController extends Controller{
 
         Member loginedMember = session.getLoginedMember();
         Information information = new Information(id, regDate, loginedMember.id, name, sex, age, major, phoneNumber, mbti, snsId, appeal);
-        informationService.write(information);
+        Container.informationDao.write(information);
 
-        System.out.printf("%d번 정보가 생성되었습니다.\n", id);
+        System.out.printf("%d번 정보가 생성되었습니다.\n", information.id);
     }
     public void showList() {
 

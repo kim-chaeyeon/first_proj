@@ -33,15 +33,17 @@ CREATE TABLE `information` (
   `snsId` char(100) NOT NULL,
   `appeal` text NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `memberId` (`memberId`),
   UNIQUE KEY `phoneNumber` (`phoneNumber`),
   UNIQUE KEY `snsId` (`snsId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `information` */
 
 insert  into `information`(`id`,`regDate`,`memberId`,`name`,`sex`,`age`,`major`,`phoneNumber`,`mbti`,`snsId`,`appeal`) values 
-(1,'2024-04-18 16:22:03','che3776','김채연','여',23,'빅데이터응용','1057113776','INTP','chae._.yeon__','안녕하세요!!');
+(1,'2024-04-19 17:43:15','','김채연','여자',23,'빅데이터응용','1057113776','INTP','chae._.yeon__','안녕하세요!!'),
+(2,'2024-04-19 17:43:19','','변우석','남자',24,'빅데이터응용','1078945612','INTJ','woo_seok','안녕'),
+(3,'2024-04-19 17:43:23','','손흥민','남자',26,'스포츠학과','1015973571','ESTJ','sonny_7','나는 축구를 좋아해'),
+(4,'2024-04-19 17:43:27','','이유리','여자',20,'국어국문학과','1012304560','ENTJ','y__r','^^');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

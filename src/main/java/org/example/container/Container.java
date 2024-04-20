@@ -21,8 +21,9 @@ public class Container {
         informationService = new InformationService();
         memberService = new MemberService();
     }
+
     public static Session getSession() {
-        if ( session == null ) {
+        if (session == null) {
             session = new Session();
         }
 
@@ -30,10 +31,27 @@ public class Container {
     }
 
     public static DBConnection getDBConnection() {
-        if ( dbConnection == null ) {
+        if (dbConnection == null) {
             dbConnection = new DBConnection();
         }
 
         return dbConnection;
     }
+
+    public static InformationDao getInformationDao() {
+        if (informationDao == null) {
+            informationDao = new InformationDao();
+        }
+
+        return informationDao;
+    }
+
+    public static MemberDao getMemberDao() {
+        if (memberDao == null) {
+            memberDao = new MemberDao();
+        }
+
+        return memberDao;
+    }
+
 }

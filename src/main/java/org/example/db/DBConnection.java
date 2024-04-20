@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 public class DBConnection {
     private Connection connection;
     public static String DB_NAME;
@@ -170,4 +171,24 @@ public class DBConnection {
             }
         }
     }
+    public static Connection getConnection() {
+        Connection connection = null;
+        try {
+            // JDBC 드라이버 로드
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // 데이터베이스 URL, 사용자 이름 및 암호 지정
+            String url = "jdbc:mysql://localhost:" + DBConnection.DB_PORT + "/" + DBConnection.DB_NAME
+                    + "?serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true";
+            String user = DBConnection.DB_USER;
+            String password = DBConnection.DB_PASSWORD;
+
+            // 데이터베이스에 연결
+            connection = DriverManager.getConnection(url, user, password);
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+        return connection;
+    }
+
 }
